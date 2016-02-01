@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <body>
+<svg width="960" height="640">
+</svg>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
 
-    var arr = [
-        {letter:"A", position: 0},
-        {letter:"B", position: 30},
-        {letter:"C", position: 60},
-        {letter:"D", position: 90}
+    var arr1 = [
+        {letter:"A"},
+        {letter:"E"},
+        {letter:"F"}
+    ];
+    var arr2 = [
+        {letter:"A"},
+        {letter:"B"},
+        {letter:"C"},
+        {letter:"D"},
+        {letter:"E"}
     ];
 
-    var svg = d3.select("body").append("svg")
-            .attr("width", 960)
-            .attr("height", 640);
+    var svg = d3.select("svg");
 
-    var elemEnter = svg.selectAll("text")
-            .data(arr)
-            .enter();
+    var texts = svg.selectAll("text")
+            .data(arr1);
 
-    elemEnter.append("text")
-            .attr("dy", "420")
-            .attr("dx", function(d) { return d.position; })
-            .text(function(d){return d.letter; });
+    texts.enter()
+            .append("text")
+            .text(function (d) { return d.letter; });
+
+    texts = svg.selectAll("text")
+            .data(arr2, function(d) { return d.letter; });
+
+    texts.enter()
+            .append("text")
+            .text(function (d) { return d.letter; });
+
+    texts.exit().remove();
 
 </script>
