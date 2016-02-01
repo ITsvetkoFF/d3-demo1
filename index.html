@@ -2,11 +2,11 @@
 <meta charset="utf-8">
 <style>
 
-    .bar {
+    .circle {
         fill: steelblue;
     }
 
-    .bar:hover {
+    .circle:hover {
         fill: brown;
     }
 
@@ -20,10 +20,7 @@
             height = 500 - margin.top - margin.bottom;
 
     var x = d3.scale.ordinal()
-            .rangeBands([0, width]);
-
-    var y = d3.scale.linear()
-            .range([height, 0]);
+            .rangePoints([0, width]);
 
     var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -37,14 +34,13 @@
         x.domain(data.map(function(d) { return d.letter; }));
 
 
-        svg.selectAll(".bar")
+        svg.selectAll(".circle")
                 .data(data)
-                .enter().append("rect")
-                .attr("class", "bar")
-                .attr("x", function(d) { return x(d.letter); })
-                .attr("width", x.rangeBand())
-                .attr("y", function(d) { return y(d.frequency); })
-                .attr("height", function(d) { return height - y(d.frequency); });
+                .enter().append("circle")
+                .attr("class", "circle")
+                .attr("cx", function(d) { return x(d.letter); })
+                .attr("cy", "400")
+                .attr("r", function(d) { return d.frequency*100; });
     });
 
 </script>
