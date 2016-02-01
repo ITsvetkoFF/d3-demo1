@@ -6,35 +6,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
 
-    var arr1 = [
-        {letter:"A"},
-        {letter:"E"},
-        {letter:"F"}
-    ];
-    var arr2 = [
-        {letter:"A"},
-        {letter:"B"},
-        {letter:"C"},
-        {letter:"D"},
-        {letter:"E"}
-    ];
+    var arr1 = ["A","B"];
+    var arr2 = ["A","C"];
 
     var svg = d3.select("svg");
 
     var texts = svg.selectAll("text")
             .data(arr1);
 
-    texts.enter()
-            .append("text")
-            .text(function (d) { return d.letter; });
+    console.log("BEFORE");
+    console.log("update, enter, exit:");
+    console.dir(texts);
+    console.dir(texts.enter());
+    console.dir(texts.exit());
+
+    texts.enter().append("text").text(function(d) { return d; });
 
     texts = svg.selectAll("text")
-            .data(arr2, function(d) { return d.letter; });
+            .data(arr2);
 
-    texts.enter()
-            .append("text")
-            .text(function (d) { return d.letter; });
-
-    texts.exit().remove();
+    console.log("\nAFTER");
+    console.log("update, enter, exit:");
+    console.dir(texts);
+    console.dir(texts.enter());
+    console.dir(texts.exit());
 
 </script>
