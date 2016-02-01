@@ -18,9 +18,8 @@
 
         elemEnter.append("text")
                 .attr("dy", "420")
-                .attr("dx", function(d,i) { return i*30 + 30; })
-                .text(function(d){return d.letter + " | " + d.frequency; })
-                .attr("style", "writing-mode: tb");
+                .attr("dx", function(d,i) { return i*30; })
+                .text(function(d){return d.letter; });
     });
 
 </script>
