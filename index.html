@@ -22,13 +22,22 @@
     d3.tsv("data.tsv", function(error, data) {
         if (error) throw error;
 
-        svg.selectAll(".circle")
+        var elemEnter = svg.selectAll(".circle")
                 .data(data)
-                .enter().append("circle")
+                .enter()
+                .append("g");
+
+        elemEnter.append("circle")
                 .attr("class", "circle")
                 .attr("cx", function(d,i) { return i*30 + 30; })
                 .attr("cy", "400")
-                .attr("r", function(d) { return d.frequency*100; });
+                .attr("r", "13");
+
+        elemEnter.append("text")
+                .attr("dy", "420")
+                .attr("dx", function(d,i) { return i*30 + 30; })
+                .text(function(d){return d.letter + " | " + d.frequency; })
+                .attr("style", "writing-mode: tb");
     });
 
 </script>
