@@ -19,9 +19,6 @@
             width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
-    var x = d3.scale.ordinal()
-            .rangePoints([0, width]);
-
     var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -31,14 +28,11 @@
     d3.tsv("data.tsv", function(error, data) {
         if (error) throw error;
 
-        x.domain(data.map(function(d) { return d.letter; }));
-
-
         svg.selectAll(".circle")
                 .data(data)
                 .enter().append("circle")
                 .attr("class", "circle")
-                .attr("cx", function(d) { return x(d.letter); })
+                .attr("cx", function(d,i) { return i*30; })
                 .attr("cy", "400")
                 .attr("r", function(d) { return d.frequency*100; });
     });
